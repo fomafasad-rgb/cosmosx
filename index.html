@@ -118,6 +118,417 @@
 
         @keyframes shine { to { background-position: 200% center; } }
         @media (max-width: 1000px) { .info-block, .info-block.reverse { grid-template-columns: 1fr; } }
+        <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOS X | ГОЛОВНИЙ ПОРТАЛ</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #010206;
+            --neon-blue: #00f2fe;
+            --neon-purple: #bc4eff;
+            --accent-orange: #ff8c00;
+            --nasa-blue: #0032a0;
+            --text-main: #e0e6ed;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        .container { width: 92%; max-width: 1400px; margin: 0 auto; }
+
+        /* HEADER & NAV */
+        header {
+            padding: 15px 0; position: fixed; top: 0; width: 100%;
+            background: rgba(1, 2, 6, 0.95); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 2px solid var(--nasa-blue);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: 2px; }
+        .logo span { color: var(--neon-blue); }
+        
+        nav { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 5px; }
+        nav a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; white-space: nowrap; transition: 0.3s; }
+        nav a:hover { color: var(--neon-blue); }
+
+        /* HERO & DASHBOARD */
+        .hero { height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 10vw, 6rem); margin-bottom: 20px; letter-spacing: 5px; }
+
+        .dashboard {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; width: 100%; margin-bottom: 80px;
+        }
+        .dash-card {
+            background: rgba(0, 50, 160, 0.1); border: 1px solid var(--nasa-blue);
+            padding: 20px; border-radius: 10px; position: relative;
+        }
+        .dash-card label { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; }
+        .dash-card span { font-family: 'Orbitron'; font-size: 1.2rem; color: #fff; }
+
+        /* SECTION STYLES */
+        .section-padding { padding: 100px 0; }
+        .section-header { margin-bottom: 80px; border-left: 5px solid var(--neon-blue); padding-left: 20px; }
+        .section-header h2 { font-family: 'Orbitron'; font-size: 2.5rem; color: #fff; text-transform: uppercase; }
+
+        .sub-section-title { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-purple); margin: 50px 0 20px; text-transform: uppercase; }
+
+        /* GRID SYSTEMS */
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
+        }
+
+        .card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 40px; border-radius: 25px; transition: 0.4s;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .card:hover { border-color: var(--neon-blue); transform: translateY(-10px); background: rgba(0, 242, 254, 0.02); }
+        .card h3 { font-family: 'Orbitron'; color: var(--neon-blue); margin-bottom: 15px; font-size: 1.6rem; }
+        .card p { font-size: 1rem; opacity: 0.8; margin-bottom: 25px; }
+        
+        .card-footer { font-family: 'Orbitron'; font-size: 0.8rem; color: var(--neon-purple); border-top: 1px solid var(--border); padding-top: 20px; }
+
+        /* MEDIA GRID */
+        .media-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 80px;
+        }
+        .media-card img { width: 100%; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
+        .media-card img:hover { transform: scale(1.05); border-color: var(--neon-blue); }
+
+        /* TECH & UKRAINE BLOCKS */
+        .info-block {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+            background: rgba(188, 78, 255, 0.03); padding: 60px; border-radius: 30px; margin-top: 60px;
+        }
+        .info-block.reverse { flex-direction: row-reverse; }
+        .info-text h2 { font-family: 'Orbitron'; margin-bottom: 30px; font-size: 2.2rem; }
+        .info-text p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.85; }
+        .info-img img { width: 100%; border-radius: 20px; border: 1px solid var(--border); }
+
+        /* CALC */
+        .calc-box { background: rgba(0, 242, 254, 0.03); padding: 60px 20px; border-radius: 40px; text-align: center; border: 1px solid rgba(0, 242, 254, 0.1); }
+        input { background: #000; border: 2px solid var(--neon-blue); padding: 15px; color: #fff; border-radius: 12px; font-family: 'Orbitron'; font-size: 1.5rem; width: 180px; text-align: center; margin: 20px 0; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 30px; }
+        .res-item { background: var(--glass); padding: 20px; border-radius: 15px; }
+        .res-item b { font-size: 2rem; color: var(--neon-blue); font-family: 'Orbitron'; display: block; }
+
+        /* QUIZ */
+        .quiz-section { background: rgba(255, 140, 0, 0.03); border-left: 5px solid var(--accent-orange); border-radius: 0 40px 40px 0; padding: 50px; margin-top: 100px; }
+        .quiz-title { font-family: 'Orbitron'; color: var(--accent-orange); margin-bottom: 30px; font-size: 1.8rem; }
+        .quiz-question { margin-bottom: 25px; }
+        .quiz-question h4 { font-family: 'Exo 2'; color: #fff; margin-bottom: 10px; }
+        .quiz-question input { width: auto; font-size: 1rem; margin-right: 10px; }
+
+        @keyframes shine { to { background-position: 200% center; } }
+        @media (max-width: 1000px) { .info-block, .info-block.reverse { grid-template-columns: 1fr; } }
+
+        footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">COSMOS<span>X</span> ULTRA</a>
+            <nav>
+                <a href="#solar">Система</a>
+                <a href="#media">Медіа</a>
+                <a href="#ua">Україна</a>
+                <a href="#tech">Техно</a>
+                <a href="#quiz">Квіз</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container hero">
+        <h1>DEEP SPACE TERMINAL</h1>
+        <p>Ваш повний путівник крізь час, простір, інженерію та історію освоєння Всесвіту.</p>
+        
+        <div class="dashboard">
+            <div class="dash-card"><label>Система</label><span>ONLINE</span></div>
+            <div class="dash-card"><label>Статус МКС</label><span id="iss-status">На орбіті</span></div>
+            <div class="dash-card"><label>Час (UTC)</label><span id="utc-time">00:00:00</span></div>
+            <div class="dash-card"><label>Час на Марсі (MTC)</label><span id="mars-time">00:00:00</span></div>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <section id="solar" class="section-padding">
+            <div class="section-header">
+                <h2>Сонячна Система <span>/ Архітектура</span></h2>
+            </div>
+
+            <div class="sub-section-title">Внутрішні світи (Скелясті)</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Меркурій</h3>
+                    <p>Найменша планета. Через відсутність атмосфери температура коливається від -180°C до +430°C. Рік триває всього 88 днів.</p>
+                    <div class="card-footer">Поверхня: Кратери, Залізо</div>
+                </div>
+                <div class="card">
+                    <h3>Венера</h3>
+                    <p>Пекельний близнюк Землі. Тиск у 92 рази вищий за земний. Атмосфера з CO₂ створює парниковий ефект (+465°C).</p>
+                    <div class="card-footer">Статус: Пекельний парниковий ефект</div>
+                </div>
+                <div class="card">
+                    <h3>Земля</h3>
+                    <p>Наш дім. Єдине відоме місце з життям. Ідеальна відстань від Сонця (Зона Золотоволоски) та магнітне поле.</p>
+                    <div class="card-footer">Населення: 8+ млрд</div>
+                </div>
+                <div class="card">
+                    <h3>Марс</h3>
+                    <p>Об'єкт колонізації №1. Тут знаходиться Олімп — найвищий вулкан у системі (21 км) та гігантський каньйон.</p>
+                    <div class="card-footer">Ціль: SpaceX Starship</div>
+                </div>
+            </div>
+
+            <div class="sub-section-title">Зовнішні світи (Гіганти)</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Юпітер</h3>
+                    <p>Король планет. У 318 разів масивніший за Землю. Його Велика Червона Пляма — це шторм, що вирує понад 300 років.</p>
+                    <div class="card-footer">Супутники: 95</div>
+                </div>
+                <div class="card">
+                    <h3>Сатурн</h3>
+                    <p>Володар кілець. Складаються з мільярдів часток криги та каміння. Має 146 супутників, серед яких Титан.</p>
+                    <div class="card-footer">Тип: Газовий гігант</div>
+                </div>
+                <div class="card">
+                    <h3>Уран та Нептун</h3>
+                    <p>Крижані гіганти. Уран обертається «на боці». На Нептуні найшвидші вітри у системі (2100 км/год).</p>
+                    <div class="card-footer">Тип: Крижані гіганти</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="media" class="section-padding">
+            <div class="section-header">
+                <h2>Медіа Центр <span>/ James Webb Space Telescope</span></h2>
+            </div>
+            <p style="margin-bottom: 30px; opacity: 0.8; max-width: 700px;">Найкращі інфрачервоні знімки Всесвіту, які коли-небудь робило людство.James Webb бачить крізь час та пил туманностей.</p>
+            <div class="media-grid">
+                <div class="media-card"><img src="https://unsplash.com/blog/content/images/2024/03/nasa-hubble-space-telescope-HLYAaUrSn0k-unsplash.jpg" alt="Туманність"></div>
+                <div class="media-card"><img src="https://unsplash.com/blog/content/images/2024/03/nasa-hubble-space-telescope-V8Sj0uE0E1U-unsplash.jpg" alt="Галактика"></div>
+                <div class="media-card"><img src="https://unsplash.com/blog/content/images/2024/03/nasa-hubble-space-telescope-TZIorZKAXYo-unsplash.jpg" alt="Чорна діра"></div>
+                <div class="media-card"><img src="https://unsplash.com/blog/content/images/2024/03/nasa-hubble-space-telescope-f_N6P1Hn50g-unsplash.jpg" alt="Космонавт"></div>
+            </div>
+        </section>
+
+        <section id="ua" class="section-padding">
+            <div class="section-header">
+                <h2>Україна в космосі <span>/ Ukrainian Footprint</span></h2>
+            </div>
+            <div class="info-block reverse">
+                <div class="info-text">
+                    <h2>Сергій Корольов: Батько космонавтики</h2>
+                    <p>Народився в Житомирі. Саме він створив ракету-носій Р-7, яка вивела на орбіту перший Супутник-1 та Юрія Гагаріна. Його геній дозволив СРСР виграти початковий етап космічної гонки.</p>
+                    <p>Окрім нього, варто згадати Валентина Глушка (Одеса), який створив найпотужніші в світі рідинні ракетні двигуни РД-170, та Юрія Кондратюка (Полтава), який розрахував траєкторію для польоту на Місяць (траса Кондратюка).</p>
+                </div>
+                <div class="info-img">
+                    <img src="https://images.unsplash.com/photo-1541876072-be6221090f6e?auto=format&fit=crop&w=800&q=80" alt="Корольов (Аватар)">
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="section-padding">
+            <div class="section-header">
+                <h2>Космічна Інженерія <span>/ Аерокосмічна металургія</span></h2>
+            </div>
+            <div class="info-block">
+                <div class="info-text">
+                    <h2>Матеріали та Конструкції</h2>
+                    <p>У космосі метал піддається впливу екстремальних перепадів температур (від -150°C до +150°C), вакууму та мікрометеоритів.</p>
+                    <p><strong>Титан (Grade 5):</strong> Основний сплав для аерокосмічної галузі. Він має високу питому міцність, стійкість до корозії та витримує кріогенні температури. Саме з нього роблять корпуси та кріплення.</p>
+                    <p><strong>Алюміній-літієві сплави:</strong> Використовуються для виготовлення паливних баків (ракети Falcon 9 SpaceX), бо вони легші та міцніші за чистий алюміній.</p>
+                </div>
+                <div class="card">
+                    <h3>Технологія герметизації</h3>
+                    <p>Для майстра по металу це цікаво: герметизація швів у космосі — це питання життя. Використовують вакуумне зварювання та спеціальні клеї, які не дегазують у вакуумі. На МКС стики «зашивають» багатошаровою ізоляцією.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calc" class="section-padding">
+            <div class="calc-box">
+                <h2 class="section-title">Твоя вага у Всесвіті</h2>
+                <p>Введи свою вагу на Землі (кг):</p>
+                <input type="number" id="wIn" placeholder="80" oninput="res()">
+                <div class="res-grid">
+                    <div class="res-item"><span>Місяць</span><b id="rM">0</b></div>
+                    <div class="res-item"><span>Марс</span><b id="rA">0</b></div>
+                    <div class="res-item"><span>Юпітер</span><b id="rJ">0</b></div>
+                    <div class="res-item"><span>Сонце</span><b id="rS">0</b></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="container quiz-section">
+            <h2 class="quiz-title">Квіз: «Чи готовий ти до польоту на Марс?»</h2>
+            <form id="marzQuiz">
+                <div class="quiz-question">
+                    <h4>1. Скільки триває doba на Марсі?</h4>
+                    <input type="radio" name="q1" value="a"> A) 24 години<br>
+                    <input type="radio" name="q1" value="b"> B) 24 години 37 хвилин<br>
+                    <input type="radio" name="q1" value="c"> C) 10 годин<br>
+                </div>
+                <div class="quiz-question">
+                    <h4>2. З якого матеріалу зазвичай роблять теплові щити?</h4>
+                    <input type="radio" name="q2" value="a"> A) Титан<br>
+                    <input type="radio" name="q2" value="b"> B) PICA (Phenolic Impregnated Carbon Ablator)<br>
+                    <input type="radio" name="q2" value="c"> C) Алюміній<br>
+                </div>
+                <div class="quiz-question">
+                    <h4>3. Чи впевнений ти у своїх навичках жерстяника для ремонту бази на Марсі?</h4>
+                    <input type="radio" name="q3" value="a"> A) Звичайно, титан і алюміній — мій хліб<br>
+                    <input type="radio" name="q3" value="b"> B) Треба потренуватися у вакуумі<br>
+                    <input type="radio" name="q3" value="c"> C) Краще залишуся на Землі<br>
+                </div>
+                <button type="button" class="read-more" onclick="checkQuiz()">Отримати результат</button>
+            </form>
+            <p id="quizResult" style="margin-top: 20px; font-weight: bold;"></p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 COSMOS X PROJECT | Велика Енциклопедія. Всі права захищені.</p>
+    </footer>
+
+    <script>
+        // ЛОГІКА ЗІРОК (WARP SPEED)
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let w, h, stars = [];
+        const count = 450;
+        const speed = 6;
+
+        class Star {
+            constructor() { this.init(); }
+            init() {
+                this.x = (Math.random() - 0.5) * 2000;
+                this.y = (Math.random() - 0.5) * 2000;
+                this.z = 2000;
+                this.prevZ = this.z;
+            }
+            update() {
+                this.prevZ = this.z;
+                this.z -= speed;
+                if (this.z <= 0) this.init();
+            }
+            draw() {
+                let x2d = (this.x / this.z) * (w / 2) + w / 2;
+                let y2d = (this.y / this.z) * (h / 2) + h / 2;
+                let px2d = (this.x / this.prevZ) * (w / 2) + w / 2;
+                let py2d = (this.y / this.prevZ) * (h / 2) + h / 2;
+
+                let size = (1 - this.z / 2000) * 3;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - this.z / 2000})`;
+                ctx.lineWidth = size;
+                ctx.beginPath();
+                ctx.moveTo(px2d, py2d);
+                ctx.lineTo(x2d, y2d);
+                ctx.stroke();
+            }
+        }
+
+        function setup() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < count; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function loop() {
+            ctx.fillStyle = '#010206';
+            ctx.fillRect(0, 0, w, h);
+            stars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', setup);
+        setup();
+        loop();
+
+        // ІМІТАЦІЯ ДИНАМІЧНИХ ДАНИХ
+        setInterval(() => {
+            const status = ["На орбіті", "Зв'язок: ОК", "Сканування...", "Дані стабільні"];
+            document.getElementById('iss-status').innerText = status[Math.floor(Math.random() * status.length)];
+            
+            const utc = new Date();
+            document.getElementById('utc-time').innerText = utc.toISOString().slice(11, 19);
+            
+            // Скрипт марсіанського годинника (спрощений Coordinated Mars Time)
+            const Sol0 = 2440587.5; // Sol 0 JD
+            const solLength = 1.02749125; // днів
+            const jd_ut = utc.getTime() / 86400000 + 2440587.5;
+            const MSD = (jd_ut - 2405522.0028779) / 1.0274912517;
+            const MTC = (MSD * 24) % 24;
+            const mtc_h = Math.floor(MTC);
+            const mtc_m = Math.floor((MTC - mtc_h) * 60);
+            const mtc_s = Math.floor(((MTC - mtc_h) * 60 - mtc_m) * 60);
+            document.getElementById('mars-time').innerText = `${mtc_h.toString().padStart(2, '0')}:${mtc_m.toString().padStart(2, '0')}:${mtc_s.toString().padStart(2, '0')}`;
+
+        }, 1000);
+
+        // КАЛЬКУЛЯТОР ВАГИ
+        function res() {
+            let v = document.getElementById('wIn').value;
+            if (v > 0) {
+                document.getElementById('rM').innerText = (v * 0.16).toFixed(1);
+                document.getElementById('rA').innerText = (v * 0.38).toFixed(1);
+                document.getElementById('rJ').innerText = (v * 2.52).toFixed(1);
+                document.getElementById('rS').innerText = (v * 27.9).toFixed(1);
+            }
+        }
+
+        // КВІЗ
+        function checkQuiz() {
+            let score = 0;
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+
+            if (q1 && q1.value === "b") score++;
+            if (q2 && q2.value === "b") score++;
+            if (q3) score++; // Ваша жерстяна жерсть — це сила
+
+            let result;
+            if (score >= 3) {
+                result = "Ти — ідеальний кандидат! Твої навички роботи з металом будуть незамінні при будівництві бази на Марсі.";
+            } else if (score >= 1) {
+                result = "Ти — майбутній колоніст, але треба трохи підтягнути фізику космосу та техніку зварювання титану.";
+            } else {
+                result = "Краще залишайся на Землі, друже. Космос — це важко.";
+            }
+            document.getElementById('quizResult').innerText = result;
+        }
+    </script>
+</body>
+</html>
+
 
         footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; }
     </style>
