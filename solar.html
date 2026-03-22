@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOS X | Сонячна Система</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Ті самі базові стилі */
+        :root { --bg: #010208; --blue: #00f2fe; --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Exo 2', sans-serif; background-color: var(--bg); color: #e0e6ed; line-height: 1.7; overflow-x: hidden; padding-top: 100px; }
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .container { width: 92%; max-width: 1200px; margin: 0 auto; }
+        
+        header { padding: 15px 0; position: fixed; top: 0; width: 100%; background: rgba(1, 2, 8, 0.95); border-bottom: 2px solid #0032a0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron'; font-size: 1.5rem; color: #fff; text-decoration: none; }
+        .logo span { color: var(--blue); }
+        nav { display: flex; gap: 20px; }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--blue); border-bottom: 1px solid var(--blue); }
+
+        /* СТИЛІ СТОРІНКИ ПЛАНЕТ */
+        .page-title { font-family: 'Orbitron'; font-size: 3rem; margin: 40px 0; color: #fff; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        
+        .planet-card { display: flex; gap: 40px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 40px; border-radius: 20px; margin-bottom: 40px; align-items: center; }
+        .planet-img { flex: 1; }
+        .planet-img img { width: 100%; border-radius: 50%; border: 2px solid var(--blue); box-shadow: 0 0 30px rgba(0,242,254,0.2); }
+        .planet-text { flex: 2; }
+        .planet-text h2 { font-family: 'Orbitron'; color: var(--blue); font-size: 2.5rem; margin-bottom: 15px; }
+        
+        @media (max-width: 800px) { .planet-card { flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">COSMOS<span>X</span></a>
+            <nav>
+                <a href="index.html">Головна</a>
+                <a href="solar.html" class="active">Система</a>
+                <a href="tech.html">Інженерія</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">СОНЯЧНА СИСТЕМА</h1>
+
+        <div class="planet-card">
+            <div class="planet-img">
+                <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=600&q=80" alt="Mars">
+            </div>
+            <div class="planet-text">
+                <h2>Марс</h2>
+                <p>Четверта планета від Сонця. Відома своїм іржавим кольором через велику кількість оксиду заліза в ґрунті. Тут знаходиться найвищий вулкан у Сонячній системі — Олімп, висота якого сягає 21 кілометра. Це головна мета для майбутніх колонізаторів.</p>
+            </div>
+        </div>
+
+        <div class="planet-card" style="flex-direction: row-reverse;">
+            <div class="planet-img">
+                <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=600&q=80" alt="Jupiter">
+            </div>
+            <div class="planet-text">
+                <h2>Юпітер</h2>
+                <p>Газовий гігант, чия маса у 318 разів перевищує земну. Його потужна гравітація працює як щит, притягуючи небезпечні комети. Велика Червона Пляма на його поверхні — це шторм, який не вщухає вже понад 300 років.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="stars.js"></script>
+</body>
+</html>
