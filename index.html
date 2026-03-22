@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSMOS X | Головний Портал</title>
+    <title>NASA-X PORTAL | Головний архів</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-black: #02040a;
+            --bg: #010206;
             --nasa-blue: #0032a0;
             --neon-blue: #00f2fe;
             --neon-purple: #bc4eff;
-            --warning-orange: #ff8c00;
-            --text-silver: #c0c0c0;
+            --text: #d1d5db;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
@@ -23,93 +22,81 @@
 
         body {
             font-family: 'Exo 2', sans-serif;
-            background-color: var(--bg-black);
-            color: #fff;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        .container { width: 92%; max-width: 1300px; margin: 0 auto; }
+        .container { width: 92%; max-width: 1400px; margin: 0 auto; }
 
-        /* HEADER: NASA STYLE */
+        /* HEADER */
         header {
-            padding: 10px 0; position: fixed; top: 0; width: 100%;
-            background: rgba(2, 4, 10, 0.95); backdrop-filter: blur(15px);
+            padding: 15px 0; position: fixed; top: 0; width: 100%;
+            background: rgba(1, 2, 6, 0.95); backdrop-filter: blur(15px);
             z-index: 1000; border-bottom: 2px solid var(--nasa-blue);
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: #fff; text-decoration: none; font-weight: bold; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; }
         .logo span { color: var(--neon-blue); }
         
         nav { display: flex; gap: 20px; }
-        nav a { color: var(--text-silver); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: bold; }
         nav a:hover { color: var(--neon-blue); }
 
-        /* HERO */
-        .hero {
-            height: 90vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
-        }
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem);
-            margin-bottom: 15px; letter-spacing: 10px; text-transform: uppercase;
-        }
-        .hero p { max-width: 650px; opacity: 0.7; margin-bottom: 30px; font-size: 1.1rem; }
+        /* HERO & DASHBOARD */
+        .hero { height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 8vw, 5rem); margin-bottom: 20px; letter-spacing: 5px; }
 
-        /* NASA DASHBOARD BLOCK */
         .dashboard {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px; margin-bottom: 60px;
+            gap: 20px; width: 100%; margin-bottom: 80px;
         }
         .dash-card {
-            background: rgba(0, 50, 160, 0.1); border: 1px solid var(--nasa-blue);
-            padding: 15px; border-radius: 5px; text-align: center;
+            background: rgba(0, 50, 160, 0.15); border: 1px solid var(--nasa-blue);
+            padding: 20px; border-radius: 10px; position: relative;
         }
-        .dash-card span { display: block; font-family: 'Orbitron'; color: var(--neon-blue); font-size: 1.2rem; }
-        .dash-card label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; }
+        .dash-card label { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .dash-card span { font-family: 'Orbitron'; font-size: 1.2rem; color: #fff; }
 
-        /* GRID SYSTEM FOR CARDS */
-        .section-title {
-            font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 40px;
-            border-left: 5px solid var(--neon-blue); padding-left: 20px;
-        }
+        /* SECTIONS */
+        .section-padding { padding: 100px 0; }
+        .section-header { margin-bottom: 60px; border-left: 4px solid var(--neon-blue); padding-left: 20px; }
+        .section-header h2 { font-family: 'Orbitron'; font-size: 2.2rem; color: #fff; text-transform: uppercase; }
 
-        .category-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; margin-bottom: 80px;
+        .sub-section-title { font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-purple); margin: 40px 0 20px; text-transform: uppercase; }
+
+        /* GRID SYSTEM */
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
         }
 
         .card {
             background: var(--glass); border: 1px solid var(--border);
-            padding: 30px; border-radius: 15px; transition: 0.4s;
+            padding: 30px; border-radius: 20px; transition: 0.4s;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .card:hover { border-color: var(--neon-blue); background: rgba(0, 242, 254, 0.02); }
-        .card h3 { font-family: 'Orbitron'; color: var(--neon-blue); margin-bottom: 15px; }
-        .card-tag { 
-            display: inline-block; padding: 3px 10px; font-size: 0.7rem; 
-            background: rgba(188, 78, 255, 0.2); border-radius: 3px; margin-bottom: 10px;
+        .card:hover { border-color: var(--neon-blue); transform: translateY(-10px); background: rgba(0, 242, 254, 0.02); }
+        .card h3 { font-family: 'Orbitron'; color: var(--neon-blue); margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px; }
+        
+        .card-footer { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--neon-purple); border-top: 1px solid var(--border); padding-top: 15px; }
+
+        /* TECH BLOCK */
+        .tech-block {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+            background: rgba(188, 78, 255, 0.05); padding: 50px; border-radius: 30px; margin-top: 50px;
         }
+        .tech-info h2 { font-family: 'Orbitron'; margin-bottom: 20px; }
+        .tech-info ul { list-style: none; }
+        .tech-info li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .tech-info li::before { content: '>'; position: absolute; left: 0; color: var(--neon-blue); }
 
-        /* ARTICLES / SUBSECTIONS */
-        .info-section { margin-bottom: 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .info-text h2 { font-family: 'Orbitron'; margin-bottom: 20px; color: var(--neon-purple); }
-        .info-text p { margin-bottom: 15px; opacity: 0.8; }
-        .info-img img { width: 100%; border-radius: 10px; opacity: 0.8; }
+        @media (max-width: 900px) { .tech-block { grid-template-columns: 1fr; } }
 
-        /* TIMELINE */
-        .timeline { border-left: 2px solid var(--nasa-blue); padding-left: 30px; margin-left: 20px; }
-        .timeline-event { position: relative; margin-bottom: 40px; }
-        .timeline-event::before { 
-            content: ''; position: absolute; left: -37px; top: 0; 
-            width: 12px; height: 12px; background: var(--neon-blue); border-radius: 50%;
-        }
-        .timeline-event b { color: var(--neon-blue); font-family: 'Orbitron'; }
-
-        @media (max-width: 850px) { .info-section { grid-template-columns: 1fr; } }
-
-        footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--nasa-blue); font-size: 0.8rem; opacity: 0.5; }
+        footer { padding: 50px 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -118,124 +105,157 @@
 
     <header>
         <div class="container header-content">
-            <a href="#" class="logo">NASA<span>X</span> CONTROL</a>
+            <a href="#" class="logo">NASA<span>X</span> PORTAL</a>
             <nav>
-                <a href="#dashboard">Статус</a>
                 <a href="#solar">Система</a>
                 <a href="#deep">Глибокий космос</a>
+                <a href="#missions">Місії</a>
                 <a href="#tech">Технології</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero container">
-        <h1>MISSON CONTROL</h1>
-        <p>Глобальний термінал моніторингу об'єктів у реальному часі. Дані отримано з мережі Deep Space Network.</p>
+    <section class="container hero">
+        <h1>DEEP SPACE LOG</h1>
+        <p>Головний термінал доступу до даних про міжзоряні об'єкти, технології колонізації та аномалії простору-часу.</p>
         
-        <div class="dashboard" id="dashboard">
-            <div class="dash-card"><label>Статус МКС</label><span id="iss-status">На орбіті</span></div>
-            <div class="dash-card"><label>Відстань до Марса</label><span>225 млн км</span></div>
-            <div class="dash-card"><label>Погода (Кратер Гейл)</label><span>-65°C</span></div>
-            <div class="dash-card"><label>Активні місії</label><span>42</span></div>
+        <div class="dashboard">
+            <div class="dash-card"><label>Статус системи</label><span>ONLINE</span></div>
+            <div class="dash-card"><label>Сигнал МКС</label><span>Стабільний</span></div>
+            <div class="dash-card"><label>Марс (Погода)</label><span>-72°C</span></div>
+            <div class="dash-card"><label>Активні зонди</label><span>284</span></div>
         </div>
     </section>
 
     <div class="container">
         
-        <h2 class="section-title" id="solar">Сонячна Система <span>/ Архітектура</span></h2>
-        
-        <h3 style="margin-bottom: 20px; font-family: 'Orbitron'; color: var(--text-silver);">1. Внутрішнє коло (Скелясті світи)</h3>
-        <div class="category-grid">
-            <div class="card">
-                <span class="card-tag">Термічний аналіз</span>
-                <h3>Меркурій</h3>
-                <p>Найменша планета. Через відсутність атмосфери її поверхня вкрита кратерами, як у Місяця. Залізний сердечник займає 75% радіусу планети.</p>
+        <section id="solar" class="section-padding">
+            <div class="section-header">
+                <h2>Сонячна Система <span>/ Архітектура</span></h2>
             </div>
-            <div class="card">
-                <span class="card-tag">Екстремальний тиск</span>
-                <h3>Венера</h3>
-                <p>Пекельний близнюк Землі. Тиск у 92 рази вищий за земний. Сонце тут встає на заході, а сідає на сході.</p>
-            </div>
-            <div class="card">
-                <span class="card-tag">Біосфера</span>
-                <h3>Земля</h3>
-                <p>Єдине місце у Всесвіті з підтвердженим життям. Магнітне поле працює як щит від космічної радіації.</p>
-            </div>
-            <div class="card">
-                <span class="card-tag">Колонізація</span>
-                <h3>Марс</h3>
-                <p>Об'єкт номер один для SpaceX. Має найвищий вулкан Олімп та каньйон Долина Марінера, який довший за всю Європу.</p>
-            </div>
-        </div>
 
-        <h3 style="margin-bottom: 20px; font-family: 'Orbitron'; color: var(--text-silver);">2. Зовнішнє коло (Газові гіганти)</h3>
-        <div class="category-grid">
-            <div class="card"><h3>Юпітер</h3><p>У 2.5 рази масивніший за всі інші планети разом. Велика Червона Пляма — це шторм, що не вщухає 350 років.</p></div>
-            <div class="card"><h3>Сатурн</h3><p>Володар кілець з чистого льоду. Має 146 супутників, серед яких Титан — єдиний супутник з щільною атмосферою.</p></div>
-            <div class="card"><h3>Уран</h3><p>Крижаний гігант, який «лежить» на боці. Його магнітні полюси знаходяться майже на екваторі.</p></div>
-            <div class="card"><h3>Нептун</h3><p>Тут дують найсильніші вітри у системі (2100 км/год). Світло від Сонця йде сюди понад 4 години.</p></div>
-        </div>
+            <div class="sub-section-title">Внутрішні світи (Скелясті)</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Меркурій</h3>
+                    <p>Найменша планета. Через відсутність атмосфери її поверхня поцяткована кратерами, як у Місяця. Температура коливається від -180°C до +430°C.</p>
+                    <div class="card-footer">Матеріал: Залізо, Силікати</div>
+                </div>
+                <div class="card">
+                    <h3>Венера</h3>
+                    <p>Пекельний близнюк Землі. Тиск на поверхні у 92 рази більший за земний — це як занурення на 1 км під воду. Хмари складаються з сірчаної кислоти.</p>
+                    <div class="card-footer">Статус: Непридатна</div>
+                </div>
+                <div class="card">
+                    <h3>Земля</h3>
+                    <p>Єдиний відомий світ з життям. Магнітне поле захищає нас від сонячного вітру, а атмосфера дозволяє воді бути в рідкому стані.</p>
+                    <div class="card-footer">Популяція: 8+ млрд</div>
+                </div>
+                <div class="card">
+                    <h3>Марс</h3>
+                    <p>Об'єкт колонізації №1. Тут знаходиться Олімп — найбільший вулкан у системі (21 км) та гігантський каньйон Долина Марінера (4000 км завдовжки).</p>
+                    <div class="card-footer">Ціль: SpaceX Starship</div>
+                </div>
+            </div>
 
-        <h2 class="section-title" id="tech">Технології <span>/ Інженерія</span></h2>
-        <div class="info-section">
-            <div class="info-text">
-                <h2>Матеріали майбутнього</h2>
-                <p>Для будівництва ракет використовують алюмінієво-літієві сплави та вуглецеве волокно. Ці матеріали мають бути легкими, але витримувати тиск та перепади температур від -250°C у тіні до +150°C на сонці.</p>
-                <p><strong>Теплові щити:</strong> Для входу в атмосферу Марса використовується матеріал PICA (Phenolic Impregnated Carbon Ablator), який буквально випаровується, забираючи зайву теплоту від капсули.</p>
+            <div class="sub-section-title">Зовнішні світи (Гіганти)</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Юпітер</h3>
+                    <p>Цар планет. У 318 разів масивніший за Землю. Має 95 супутників. Велика Червона Пляма — це шторм, який вирує вже понад 300 років.</p>
+                    <div class="card-footer">Тип: Газовий гігант</div>
+                </div>
+                <div class="card">
+                    <h3>Сатурн</h3>
+                    <p>Відомий своїми кільцями з льоду та пилу. Його супутник Титан має щільну атмосферу та озера з рідкого метану.</p>
+                    <div class="card-footer">Кількість кілець: 7 груп</div>
+                </div>
+                <div class="card">
+                    <h3>Уран та Нептун</h3>
+                    <p>Крижані гіганти. Уран обертається «на боці», а на Нептуні дують найшвидші вітри у системі — до 2100 км/год.</p>
+                    <div class="card-footer">Статус: Крижані світи</div>
+                </div>
             </div>
-            <div class="info-img">
-                <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=800&q=80" alt="Rocket Engine">
-            </div>
-        </div>
+        </section>
 
-        <h2 class="section-title" id="deep">Глибокий Космос <span>/ Таємниці</span></h2>
-        <div class="category-grid">
-            <div class="card">
-                <h3>Квазари</h3>
-                <p>Найяскравіші об'єкти у Всесвіті. Один квазар може світити у 1000 разів яскравіше, ніж вся наша галактика Чумацький Шлях.</p>
+        <section id="tech" class="section-padding">
+            <div class="section-header">
+                <h2>Інженерія <span>/ Космічні сплави</span></h2>
             </div>
-            <div class="card">
-                <h3>Пульсари</h3>
-                <p>Мертві зірки, що обертаються зі швидкістю до 700 обертів на секунду, випускаючи промені радіації, як космічні маяки.</p>
+            <div class="tech-block">
+                <div class="tech-info">
+                    <p>Для будівництва космічних апаратів використовують унікальні матеріали, здатні витримувати екстремальні перепади температур та вакуум.</p>
+                    <ul>
+                        <li><strong>Титан (Grade 5):</strong> Основний матеріал для кріплень та корпусів через високу міцність при малій вазі.</li>
+                        <li><strong>Алюміній-літієві сплави:</strong> Використовуються в баках SpaceX Starship та Falcon 9.</li>
+                        <li><strong>Кевлар та Номекс:</strong> Для захисту від мікрометеоритів та виготовлення скафандрів.</li>
+                        <li><strong>Вакуумне зварювання:</strong> Особливий процес з'єднання металів у безповітряному просторі.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Конструкційний виклик</h3>
+                    <p>На Марсі металеві конструкції піддаються впливу дрібного пилу, який працює як абразив. Тобі, як майстру, було б цікаво: герметизація швів там — це питання виживання №1.</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Екзопланети</h3>
-                <p>Планети в інших зоряних системах. На сьогодні відкрито понад 5500 таких світів, деякі з них потенційно придатні для життя.</p>
-            </div>
-        </div>
+        </section>
 
-        <h2 class="section-title">Таймлайн <span>/ Chronos</span></h2>
-        <div class="timeline">
-            <div class="timeline-event">
-                <b>13.8 млрд років тому</b>
-                <p>Великий вибух. Народження простору, часу та матерії з однієї точки сингулярності.</p>
+        <section id="deep" class="section-padding">
+            <div class="section-header">
+                <h2>Глибокий Космос <span>/ Об'єкти</span></h2>
             </div>
-            <div class="timeline-event">
-                <b>4.6 млрд років тому</b>
-                <p>Формування Сонячної системи з гігантської молекулярної хмари газу та пилу.</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Чорні діри</h3>
+                    <p>Об'єкти з нескінченною щільністю. Поблизу них час сповільнюється. Горизонт подій — це межа, за якою навіть світло не може втекти.</p>
+                    <div class="card-footer">Феномен: Викривлення часу</div>
+                </div>
+                <div class="card">
+                    <h3>Квазари</h3>
+                    <p>Найяскравіші об'єкти у Всесвіті. Один квазар може світити яскравіше за 100 галактик, споживаючи масу Сонця щодня.</p>
+                    <div class="card-footer">Тип: Активне ядро</div>
+                </div>
+                <div class="card">
+                    <h3>Екзопланети</h3>
+                    <p>Планети в інших зоряних системах. Ми шукаємо «Землю 2.0» — планету в зоні життя, де може бути рідка вода.</p>
+                    <div class="card-footer">Знайдено: 5500+ світів</div>
+                </div>
             </div>
-            <div class="timeline-event">
-                <b>1969 рік н.е.</b>
-                <p>Перший крок людини на Місяці (Ніл Армстронг, місія Apollo 11).</p>
+        </section>
+
+        <section id="missions" class="section-padding">
+            <div class="section-header">
+                <h2>Місії <span>/ Хронологія</span></h2>
             </div>
-            <div class="timeline-event">
-                <b>2026 рік н.е.</b>
-                <p>Сьогодні. Підготовка до місій Artemis та колонізації Марса.</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Voyager 1 & 2</h3>
+                    <p>Найдальші об'єкти, створені людиною. Вони вже покинули Сонячну систему і несуть «Золоту платівку» з посланням для інопланетян.</p>
+                </div>
+                <div class="card">
+                    <h3>James Webb</h3>
+                    <p>Найпотужніший інфрачервоний телескоп. Він бачить перші галактики, що утворилися після Великого Вибуху.</p>
+                </div>
+                <div class="card">
+                    <h3>Artemis</h3>
+                    <p>Повернення людей на Місяць у 2026-2027 роках. Побудова першої постійної бази на південному полюсі супутника.</p>
+                </div>
             </div>
-        </div>
+        </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 NASA-X DATA TERMINAL. Всі дані верифіковано. Зроблено для дослідження нескінченності.</p>
+        <div class="container">
+            <p>&copy; 2026 NASA-X DATA TERMINAL. Всі права на зірки захищені. Дані верифіковано.</p>
+        </div>
     </footer>
 
     <script>
-        // ЕФЕКТ ЗІРОК (WARP SPEED)
+        // ЛОГІКА ЗІРОК (WARP SPEED)
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         let w, h, stars = [];
-        const speed = 5;
+        const count = 450, speed = 5;
 
         class Star {
             constructor() { this.init(); }
@@ -253,9 +273,9 @@
                 let y2d = (this.y / this.z) * (h / 2) + h / 2;
                 let px2d = (this.x / this.prevZ) * (w / 2) + w / 2;
                 let py2d = (this.y / this.prevZ) * (h / 2) + h / 2;
-                let size = (1 - this.z / 2000) * 3;
+                let s = (1 - this.z / 2000) * 3;
                 ctx.strokeStyle = `rgba(255, 255, 255, ${1 - this.z / 2000})`;
-                ctx.lineWidth = size; ctx.beginPath();
+                ctx.lineWidth = s; ctx.beginPath();
                 ctx.moveTo(px2d, py2d); ctx.lineTo(x2d, y2d); ctx.stroke();
             }
         }
@@ -263,7 +283,7 @@
         function setup() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
-            stars = []; for (let i = 0; i < 400; i++) stars.push(new Star());
+            stars = []; for (let i = 0; i < count; i++) stars.push(new Star());
         }
         function loop() {
             ctx.fillStyle = '#010206'; ctx.fillRect(0, 0, w, h);
@@ -272,12 +292,6 @@
         }
         window.addEventListener('resize', setup);
         setup(); loop();
-
-        // ІМІТАЦІЯ ДИНАМІЧНИХ ДАНИХ
-        setInterval(() => {
-            const status = ["На орбіті", "Зв'язок: ОК", "Сканування...", "Дані стабільні"];
-            document.getElementById('iss-status').innerText = status[Math.floor(Math.random() * status.length)];
-        }, 3000);
     </script>
 </body>
 </html>
