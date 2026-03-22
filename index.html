@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSMOS X | Головний Портал Ultra</title>
+    <title>COSMOS X | ПОВНА ЕНЦИКЛОПЕДІЯ</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-black: #010206;
-            --nasa-blue: #0032a0;
-            --neon-blue: #00f2fe;
-            --neon-purple: #bc4eff;
-            --accent-orange: #ff8c00;
-            --text-silver: #d1d5db;
+            --bg: #010208;
+            --blue: #00f2fe;
+            --purple: #bc4eff;
+            --orange: #ff8c00;
+            --text: #e0e6ed;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
@@ -23,111 +22,74 @@
 
         body {
             font-family: 'Exo 2', sans-serif;
-            background-color: var(--bg-black);
-            color: #fff;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
         #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        .container { width: 92%; max-width: 1400px; margin: 0 auto; }
+        .container { width: 92%; max-width: 1300px; margin: 0 auto; }
 
-        /* HEADER & NAV */
+        /* HEADER */
         header {
             padding: 15px 0; position: fixed; top: 0; width: 100%;
-            background: rgba(1, 2, 6, 0.95); backdrop-filter: blur(15px);
-            z-index: 1000; border-bottom: 2px solid var(--nasa-blue);
+            background: rgba(1, 2, 8, 0.96); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 2px solid #0032a0;
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; }
-        .logo span { color: var(--neon-blue); }
-        
-        nav { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 5px; }
-        nav::-webkit-scrollbar { height: 2px; }
-        nav a { color: var(--text-silver); text-decoration: none; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; white-space: nowrap; transition: 0.3s; }
-        nav a:hover { color: var(--neon-blue); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: 2px; }
+        .logo span { color: var(--blue); }
+        nav { display: flex; gap: 20px; overflow-x: auto; }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; white-space: nowrap; }
 
-        /* HERO & DASHBOARD */
+        /* HERO */
         .hero { height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 20px; letter-spacing: 5px; }
-        .hero p { max-width: 700px; opacity: 0.7; margin-bottom: 40px; font-size: 1.1rem; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 10vw, 6rem); margin-bottom: 20px; letter-spacing: 5px; background: linear-gradient(90deg, #fff, var(--blue), var(--purple), #fff); -webkit-background-clip: text; color: transparent; background-size: 200%; animation: shine 5s linear infinite; }
+        .hero p { max-width: 800px; font-size: 1.2rem; opacity: 0.8; margin-bottom: 40px; }
 
-        .dashboard {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px; width: 100%; margin-bottom: 80px;
-        }
-        .dash-card {
-            background: rgba(0, 50, 160, 0.1); border: 1px solid var(--nasa-blue);
-            padding: 20px; border-radius: 10px; text-align: center;
-        }
-        .dash-card label { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; }
-        .dash-card span { font-family: 'Orbitron'; font-size: 1.2rem; color: #fff; }
+        /* NASA DASHBOARD */
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .dash-card { background: rgba(0, 50, 160, 0.15); border: 1px solid #0032a0; padding: 20px; border-radius: 10px; text-align: center; }
+        .dash-card label { font-size: 0.65rem; color: var(--blue); text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .dash-card span { font-family: 'Orbitron'; font-size: 1.2rem; }
 
-        /* SECTION STYLES */
+        /* SECTIONS */
         .section-padding { padding: 120px 0; }
-        .section-header { margin-bottom: 80px; border-left: 5px solid var(--neon-blue); padding-left: 20px; }
-        .section-header h2 { font-family: 'Orbitron'; font-size: 2.5rem; color: #fff; text-transform: uppercase; }
+        .section-header { margin-bottom: 60px; border-left: 5px solid var(--blue); padding-left: 20px; }
+        .section-header h2 { font-family: 'Orbitron'; font-size: 2.5rem; text-transform: uppercase; }
 
-        .sub-section-title { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-purple); margin: 50px 0 20px; text-transform: uppercase; }
+        /* ARTICLES & CARDS */
+        .article-card { background: var(--glass); border: 1px solid var(--border); padding: 50px; border-radius: 40px; margin-bottom: 60px; }
+        .article-card h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 20px; font-size: 2rem; }
+        .article-card p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.9; }
+        .article-card img { width: 100%; border-radius: 20px; margin: 30px 0; border: 1px solid var(--border); object-fit: cover; max-height: 500px; }
 
-        /* GRID SYSTEM */
-        .cards-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
-        }
+        .planet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .planet-card { background: var(--glass); padding: 35px; border-radius: 25px; border: 1px solid var(--border); transition: 0.4s; }
+        .planet-card:hover { border-color: var(--blue); transform: translateY(-10px); }
+        .planet-card h3 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 15px; }
 
-        .card {
-            background: var(--glass); border: 1px solid var(--border);
-            padding: 40px; border-radius: 25px; transition: 0.4s;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .card:hover { border-color: var(--neon-blue); transform: translateY(-10px); background: rgba(0, 242, 254, 0.02); }
-        .card h3 { font-family: 'Orbitron'; color: var(--neon-blue); margin-bottom: 15px; font-size: 1.6rem; }
-        .card-tag { display: inline-block; padding: 3px 10px; font-size: 0.7rem; background: rgba(188, 78, 255, 0.2); border-radius: 3px; margin-bottom: 10px; }
+        /* SCHEME */
+        .scheme-box { display: grid; grid-template-columns: 1fr 200px; gap: 40px; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); }
+        .stages { display: flex; flex-direction: column; gap: 35px; }
+        .stage { opacity: 0.2; transition: 0.5s; }
+        .stage.active { opacity: 1; transform: translateX(10px); }
+        .stage h4 { font-family: 'Orbitron'; color: var(--blue); }
+        
+        .rocket-track { position: relative; height: 500px; background: rgba(255,255,255,0.05); border-radius: 100px; border: 1px solid var(--border); display: flex; justify-content: center; }
+        #rocket { position: absolute; width: 50px; bottom: 0; transition: 1.5s cubic-bezier(0.45, 0.05, 0.55, 0.95); filter: drop-shadow(0 0 15px var(--blue)); }
 
-        /* MEDIA GRID */
-        .media-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 80px;
-        }
-        .media-card img { width: 100%; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
-        .media-card img:hover { transform: scale(1.05); border-color: var(--neon-blue); }
-
-        /* INFO & TECH BLOCKS */
-        .info-block {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-            background: rgba(188, 78, 255, 0.03); padding: 60px; border-radius: 30px; margin-top: 60px;
-        }
-        .info-block.reverse { flex-direction: row-reverse; }
-        .info-text h2 { font-family: 'Orbitron'; margin-bottom: 30px; font-size: 2.2rem; }
-        .info-img img { width: 100%; border-radius: 20px; border: 1px solid var(--border); }
-
-        /* CALC */
-        .calc-box { background: rgba(0, 242, 254, 0.03); padding: 60px 20px; border-radius: 40px; text-align: center; border: 1px solid rgba(0, 242, 254, 0.1); }
-        input { background: #000; border: 2px solid var(--neon-blue); padding: 15px; color: #fff; border-radius: 12px; font-family: 'Orbitron'; font-size: 1.5rem; width: 180px; text-align: center; margin: 20px 0; }
-        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 30px; }
-        .res-item { background: var(--glass); padding: 20px; border-radius: 15px; }
-        .res-item b { font-size: 2rem; color: var(--neon-blue); font-family: 'Orbitron'; display: block; }
-
-        /* QUIZ */
-        .quiz-section { background: rgba(255, 140, 0, 0.03); border-left: 5px solid var(--accent-orange); border-radius: 0 40px 40px 0; padding: 50px; margin-top: 100px; }
-        .quiz-title { font-family: 'Orbitron'; color: var(--accent-orange); margin-bottom: 30px; font-size: 1.8rem; }
-        .quiz-question { margin-bottom: 25px; }
-        .quiz-question input { width: auto; font-size: 1rem; margin-right: 10px; }
-
-        /* FLIGHT SCHEME */
-        .mission-map { display: grid; grid-template-columns: 1fr 150px; gap: 30px; background: rgba(0,0,0,0.2); padding: 50px; border-radius: 30px; border: 1px solid var(--border); margin-top: 60px; }
-        .stages-info { display: flex; flex-direction: column; gap: 40px; }
-        .stage-item { opacity: 0.3; transition: 0.5s; padding-left: 20px; border-left: 2px solid transparent; }
-        .stage-item.active { opacity: 1; border-left: 2px solid var(--neon-blue); transform: translateX(10px); }
-        .st-num { font-family: 'Orbitron'; color: var(--neon-blue); font-size: 1.5rem; }
-        .rocket-path { position: relative; height: 500px; display: flex; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 10px; }
-        #rocket-icon { position: absolute; font-size: 2.5rem; bottom: 0; transition: 1s cubic-bezier(0.45, 0.05, 0.55, 0.95); filter: drop-shadow(0 0 10px var(--neon-blue)); }
-        .height-marker { position: absolute; right: 10px; font-size: 0.7rem; font-family: 'Orbitron'; color: var(--neon-purple); opacity: 0.6; }
+        /* CALC & QUIZ */
+        .calc-area { background: rgba(188, 78, 255, 0.05); padding: 60px; border-radius: 40px; text-align: center; border: 1px solid rgba(188, 78, 255, 0.1); }
+        input { background: #000; border: 2px solid var(--blue); padding: 15px; color: #fff; border-radius: 12px; font-family: 'Orbitron'; font-size: 1.5rem; text-align: center; margin: 20px 0; width: 200px; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 30px; }
+        .res-item b { font-size: 2rem; color: var(--blue); font-family: 'Orbitron'; display: block; }
 
         @keyframes shine { to { background-position: 200% center; } }
-        @media (max-width: 1000px) { .info-block, .info-block.reverse { grid-template-columns: 1fr; } .mission-map { grid-template-columns: 1fr; } }
-
-        footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; opacity: 0.5; }
+        @media (max-width: 900px) { .scheme-box { grid-template-columns: 1fr; } .rocket-track { height: 300px; } }
+        footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -136,123 +98,109 @@
 
     <header>
         <div class="container header-content">
-            <a href="#" class="logo">COSMOS<span>X</span> ULTRA</a>
+            <a href="#" class="logo">COSMOS<span>X</span> GIGA</a>
             <nav>
                 <a href="#solar">Система</a>
-                <a href="#media">Медіа</a>
+                <a href="#deep">Глибокий космос</a>
                 <a href="#ua">Україна</a>
+                <a href="#tech">Інженерія</a>
                 <a href="#scheme">Схема</a>
-                <a href="#quiz">Квіз</a>
             </nav>
         </div>
     </header>
 
     <section class="container hero">
-        <h1>MISSON PROFILE</h1>
-        <p>Ваш повний путівник крізь час, простір, інженерію та історію освоєння Всесвіту.</p>
+        <h1>UNIVERSE ARCHIVE</h1>
+        <p>Найсвіжіші дані про Сонячну систему, технології міжпланетних перельотів та історію українського космосу.</p>
         
         <div class="dashboard">
             <div class="dash-card"><label>Система</label><span>ONLINE</span></div>
-            <div class="dash-card"><label>Статус МКС</label><span id="iss-status">На орбіті</span></div>
-            <div class="dash-card"><label>Час (UTC)</label><span id="utc-time">00:00:00</span></div>
-            <div class="dash-card"><label>Марс (MTC)</label><span id="mars-time">00:00:00</span></div>
+            <div class="dash-card"><label>Статус МКС</label><span id="iss-st">На орбіті</span></div>
+            <div class="dash-card"><label>Час (UTC)</label><span id="utc">00:00:00</span></div>
+            <div class="dash-card"><label>Марс (MTC)</label><span id="mars">00:00:00</span></div>
         </div>
     </section>
 
     <div class="container">
         
         <section id="solar" class="section-padding">
-            <div class="section-header">
-                <h2>Сонячна Система <span>/ Архітектура</span></h2>
+            <div class="section-header"><h2>Наше <span>Сусідство</span></h2></div>
+            
+            <div class="article-card">
+                <h2>Сонце: Енергетичне ядро</h2>
+                <img src="https://images.unsplash.com/photo-1541876072-be6221090f6e?auto=format&fit=crop&w=1200&q=80" alt="Sun">
+                <p>Сонце — це майже ідеальна куля з гарячої плазми, що становить 99.8% маси всієї нашої системи. У його ядрі щосекунди 600 мільйонів тонн водню перетворюються на гелій. Ця енергія йде до Землі всього за 8 хвилин і 20 секунд, даруючи нам життя.</p>
             </div>
 
-            <div class="sub-section-title">Внутрішні світи (Скелясті)</div>
-            <div class="cards-grid">
-                <div class="card">
-                    <span class="card-tag">Термічний аналіз</span>
+            <div class="planet-grid">
+                <div class="planet-card">
                     <h3>Меркурій</h3>
-                    <p>Найменша планета. Через відсутність атмосфери температура коливається від -180°C до +430°C. Залізний сердечник займає 75% радіусу.</p>
+                    <p>Найменша планета. Через відсутність атмосфери температура тут скаче від -180°C до +430°C. Залізний сердечник займає більшу частину планети.</p>
                 </div>
-                <div class="card">
-                    <span class="card-tag">Парниковий ефект</span>
+                <div class="planet-card">
                     <h3>Венера</h3>
-                    <p>Пекельний близнюк Землі. Тиск у 92 рази вищий за земний — це як занурення на 1 км під воду. Сонце встає на заході.</p>
+                    <p>Пекельний близнюк Землі. Тиск у 92 рази вищий за земний. Хмари з сірчаної кислоти створюють страшний парниковий ефект.</p>
                 </div>
-                <div class="card">
-                    <span class="card-tag">Біосфера</span>
-                    <h3>Земля</h3>
-                    <p>Наш дім. Єдине місце з життям. Ідеальна відстань від Сонця (Зона Золотоволоски) та магнітне поле.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Колонізація</span>
+                <div class="planet-card">
                     <h3>Марс</h3>
-                    <p>Об'єкт колонізації №1. Тут знаходиться Олімп — найвищий вулкан у системі (21 км) та гігантський каньйон.</p>
+                    <p>Наша майбутня колонія. Тут знаходиться Олімп — найвищий вулкан у системі (21 км). SpaceX планує перші місії на Starship вже найближчими роками.</p>
                 </div>
-            </div>
-
-            <div class="sub-section-title">Зовнішні світи (Гіганти)</div>
-            <div class="cards-grid">
-                <div class="card"><h3>Юпітер</h3><p>У 318 разів масивніший за Землю. Його Велика Червона Пляма — це шторм, що вирує вже понад 300 років.</p></div>
-                <div class="card"><h3>Сатурн</h3><p>Володар кілець. Складаються з мільярдів часток криги та каміння. Його супутник Титан має щільну атмосферу.</p></div>
-                <div class="card"><h3>Уран</h3><p>Крижаний гігант, який «лежить» на боці. Його магнітні полюси знаходяться майже на екваторі.</p></div>
-                <div class="card"><h3>Нептун</h3><p>Тут дують найшвидші вітри у системі (2100 км/год). Світло від Сонця йде сюди понад 4 години.</p></div>
+                <div class="planet-card">
+                    <h3>Юпітер</h3>
+                    <p>Король планет. Він настільки великий, що всередині нього могли б поміститися всі інші планети разом узяті.</p>
+                </div>
             </div>
         </section>
 
-        <section id="media" class="section-padding">
-            <div class="section-header">
-                <h2>Медіа Центр <span>/ James Webb Space Telescope</span></h2>
-            </div>
-            <div class="media-grid">
-                <div class="media-card"><img src="https://images.unsplash.com/photo-1707058665477-560297ffe913?auto=format&fit=crop&w=800&q=80" alt="Туманність"></div>
-                <div class="media-card"><img src="https://unsplash.com/blog/content/images/2024/03/nasa-hubble-space-telescope-HLYAaUrSn0k-unsplash.jpg" alt="Галактика"></div>
-                <div class="media-card"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=80" alt="Чорна діра"></div>
-                <div class="media-card"><img src="https://images.unsplash.com/photo-1541876072-be6221090f6e?auto=format&fit=crop&w=800&q=80" alt="Космонавт"></div>
+        <section id="deep" class="section-padding">
+            <div class="section-header"><h2>Глибокий <span>Космос</span></h2></div>
+            <div class="article-card">
+                <h2>Чорні діри: Горизонт подій</h2>
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80" alt="Black Hole">
+                <p>Чорна діра — це область простору-часу, де гравітація настільки сильна, що ніщо — навіть світло — не може з неї втекти. Межа чорної діри називається Горизонтом подій. Коли об'єкт перетинає цю межу, він назавжди зникає з нашого Всесвіту.</p>
+                <p>В центрі чорної діри знаходиться сингулярність — точка, де щільність нескінченна, а закони фізики, які ми знаємо, перестають працювати.</p>
             </div>
         </section>
 
         <section id="ua" class="section-padding">
-            <div class="section-header">
-                <h2>Україна в космосі <span>/ Ukrainian Footprint</span></h2>
-            </div>
-            <div class="info-block reverse">
-                <div class="info-text">
-                    <h2>Сергій Корольов: Батько космонавтики</h2>
-                    <p>Народився в Житомирі. Саме він створив ракету-носій Р-7, яка вивела на орбіту перший Супутник-1 та Юрія Гагаріна.</p>
-                    <p>Також варто згадати Валентина Глушка (Одеса), який створив найпотужніші в світі рідинні ракетні двигуни, та Юрія Кондратюка (Полтава), який розрахував траєкторію для польоту на Місяць.</p>
-                </div>
-                <div class="info-img">
-                    <img src="https://images.unsplash.com/photo-1541876072-be6221090f6e?auto=format&fit=crop&w=800&q=80" alt="Корольов (Аватар)">
-                </div>
+            <div class="section-header"><h2>Україна в <span>Космосі</span></h2></div>
+            <div class="article-card">
+                <h2>Сергій Корольов та Юрій Кондратюк</h2>
+                <p>Мало хто знає, але саме українець Сергій Корольов (Житомир) був головним конструктором, який запустив перший супутник і першу людину в космос. Юрій Кондратюк (Полтава) ще за 50 років до польотів на Місяць розрахував "трасу Кондратюка", за якою американці згодом висаджувалися на супутник Землі.</p>
+                <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Space Tech">
             </div>
         </section>
 
-        <section id="scheme" class="container section-padding">
-            <div class="section-header">
-                <h2>Схема польоту <span>/ Flight Profile</span></h2>
+        <section id="tech" class="section-padding">
+            <div class="section-header"><h2>Аерокосмічна <span>Металургія</span></h2></div>
+            <div class="article-card">
+                <h2>Метали майбутнього: Титан та Сплави</h2>
+                <p>У космосі метал має витримувати перепади від -150°C до +150°C. Титан Grade 5 є основою аерокосмічної галузі через свою міцність і легкість. Алюміній-літієві сплави використовуються в баках ракет SpaceX, бо вони не бояться кріогенного палива.</p>
+                <p>Для тебе як майстра цікавий факт: вакуумне зварювання в космосі — це унікальний процес, де метали з’єднуються на молекулярному рівні майже миттєво через відсутність окислення.</p>
             </div>
-            <div class="mission-map">
-                <div class="stages-info">
-                    <div class="stage-item" id="st-4"><span class="st-num">04</span><h4>Цільова орбіта (400 км)</h4></div>
-                    <div class="stage-item" id="st-3"><span class="st-num">03</span><h4>Скидання обтічника (110 км)</h4></div>
-                    <div class="stage-item" id="st-2"><span class="st-num">02</span><h4>Розділення ступенів (70 км)</h4></div>
-                    <div class="stage-item active" id="st-1"><span class="st-num">01</span><h4>Старт / Liftoff (0 км)</h4></div>
+        </section>
+
+        <section id="scheme" class="section-padding">
+            <div class="section-header"><h2>Схема <span>Польоту</span></h2></div>
+            <div class="scheme-box">
+                <div class="stages">
+                    <div class="stage" id="s4"><h4>04. Цільова орбіта (400 км)</h4><p>Розгортання систем.</p></div>
+                    <div class="stage" id="s3"><h4>03. Скидання обтічника (110 км)</h4><p>Вихід з атмосфери.</p></div>
+                    <div class="stage" id="s2"><h4>02. Розділення ступенів (70 км)</h4><p>Вимкнення двигунів.</p></div>
+                    <div class="stage active" id="s1"><h4>01. Старт (0 км)</h4><p>Максимальна тяга.</p></div>
                 </div>
-                <div class="rocket-path">
-                    <div id="rocket-icon">🚀</div>
-                    <div class="height-marker" style="bottom: 0;">0 км</div>
-                    <div class="height-marker" style="bottom: 25%;">70 км</div>
-                    <div class="height-marker" style="bottom: 50%;">110 км</div>
-                    <div class="height-marker" style="bottom: 95%;">400 км</div>
+                <div class="rocket-track">
+                    <svg id="rocket" viewBox="0 0 24 24" fill="white">
+                        <path d="M12,2C12,2 9,6 9,12C9,15 11,17 12,17C13,17 15,15 15,12C15,6 12,2 12,2M12,19C10.5,19 9.3,19.8 8.8,21C8.6,21.5 8.9,22 9.4,22H14.6C15.1,22 15.4,21.5 15.2,21C14.7,19.8 13.5,19 12,19Z" />
+                    </svg>
                 </div>
             </div>
         </section>
 
         <section id="calc" class="section-padding">
-            <div class="calc-box">
-                <h2 class="section-title">Твоя вага у Всесвіті</h2>
-                <p>Введи свою вагу на Землі (кг):</p>
-                <input type="number" id="wIn" placeholder="80" oninput="res()">
+            <div class="calc-area">
+                <h2 style="font-family: 'Orbitron'; margin-bottom: 20px;">Твоя вага в Космосі</h2>
+                <input type="number" id="wIn" placeholder="Введіть кг" oninput="calcW()">
                 <div class="res-grid">
                     <div class="res-item"><span>Місяць</span><b id="rM">0</b></div>
                     <div class="res-item"><span>Марс</span><b id="rA">0</b></div>
@@ -262,114 +210,64 @@
             </div>
         </section>
 
-        <section id="quiz" class="container quiz-section">
-            <h2 class="quiz-title">Квіз: «Чи готовий ти до польоту на Марс?»</h2>
-            <form id="marzQuiz">
-                <div class="quiz-question">
-                    <h4>1. Чи впевнений ти у своїх навичках для ремонту бази на Марсі?</h4>
-                    <input type="radio" name="q3" value="a"> A) Звичайно, метал — мій хліб<br>
-                    <input type="radio" name="q3" value="b"> B) Треба потренуватися у вакуумі<br>
-                    <input type="radio" name="q3" value="c"> C) Краще залишуся на Землі<br>
-                </div>
-                <button type="button" class="read-more" onclick="checkQuiz()">Отримати результат</button>
-            </form>
-            <p id="quizResult" style="margin-top: 20px; font-weight: bold;"></p>
-        </section>
-
     </div>
 
     <footer>
-        <p>&copy; 2026 COSMOS X Project | Всі таємниці розкрито. Зроблено з любов'ю до нескінченності.</p>
+        <p>&copy; 2026 COSMOS X Project | Всі системи стабільні. Зроблено для Сергія.</p>
     </footer>
 
     <script>
-        // ЛОГІКА ЗІРОК (WARP SPEED)
+        // ЗІРКИ
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         let w, h, stars = [];
-        const count = 450, speed = 6;
-
-        class Star {
-            constructor() { this.init(); }
-            init() {
-                this.x = (Math.random() - 0.5) * 2000;
-                this.y = (Math.random() - 0.5) * 2000;
-                this.z = 2000; this.prevZ = this.z;
-            }
-            update() {
-                this.prevZ = this.z; this.z -= speed;
-                if (this.z <= 0) this.init();
-            }
-            draw() {
-                let x2d = (this.x / this.z) * (w / 2) + w / 2;
-                let y2d = (this.y / this.z) * (h / 2) + h / 2;
-                let px2d = (this.x / this.prevZ) * (w / 2) + w / 2;
-                let py2d = (this.y / this.prevZ) * (h / 2) + h / 2;
-                let s = (1 - this.z / 2000) * 3;
-                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - this.z / 2000})`;
-                ctx.lineWidth = s; ctx.beginPath();
-                ctx.moveTo(px2d, py2d); ctx.lineTo(x2d, y2d); ctx.stroke();
-            }
-        }
-
         function setup() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
-            stars = []; for (let i = 0; i < count; i++) stars.push(new Star());
+            stars = [];
+            for(let i=0; i<400; i++) stars.push({x:(Math.random()-0.5)*2000, y:(Math.random()-0.5)*2000, z:2000});
         }
         function loop() {
-            ctx.fillStyle = '#010206'; ctx.fillRect(0, 0, w, h);
-            stars.forEach(s => { s.update(); s.draw(); });
+            ctx.fillStyle = '#010208'; ctx.fillRect(0,0,w,h);
+            stars.forEach(s => {
+                s.z -= 6; if(s.z<=0) s.z=2000;
+                let x = (s.x/s.z)*(w/2)+w/2; let y = (s.y/s.z)*(h/2)+h/2;
+                let size = (1-s.z/2000)*3; ctx.fillStyle = `rgba(255,255,255,${1-s.z/2000})`;
+                ctx.beginPath(); ctx.arc(x,y,size,0,Math.PI*2); ctx.fill();
+            });
             requestAnimationFrame(loop);
         }
-        window.addEventListener('resize', setup);
-        setup(); loop();
+        window.addEventListener('resize', setup); setup(); loop();
 
-        // СХЕМА ПОЛЬОТУ
-        let currentStage = 1;
+        // РАКЕТА ТА СХЕМА
+        let stage = 1;
         setInterval(() => {
-            const rocket = document.getElementById('rocket-icon');
-            const stages = document.querySelectorAll('.stage-item');
-            currentStage++;
-            if(currentStage > 4) currentStage = 1;
-            let position = (currentStage - 1) * 30;
-            if(currentStage === 4) position = 90;
-            rocket.style.bottom = position + '%';
-            stages.forEach(s => s.classList.remove('active'));
-            document.getElementById('st-' + currentStage).classList.add('active');
+            stage++; if(stage>4) stage=1;
+            const r = document.getElementById('rocket');
+            const st = document.querySelectorAll('.stage');
+            let pos = (stage-1)*30; if(stage===4) pos=90;
+            r.style.bottom = pos + '%';
+            st.forEach(s => s.classList.remove('active'));
+            document.getElementById('s' + stage).classList.add('active');
         }, 3000);
 
         // КАЛЬКУЛЯТОР
-        function res() {
+        function calcW() {
             let v = document.getElementById('wIn').value;
-            if (v > 0) {
-                document.getElementById('rM').innerText = (v * 0.16).toFixed(1);
-                document.getElementById('rA').innerText = (v * 0.38).toFixed(1);
-                document.getElementById('rJ').innerText = (v * 2.52).toFixed(1);
-                document.getElementById('rS').innerText = (v * 27.9).toFixed(1);
+            if(v>0) {
+                document.getElementById('rM').innerText = (v*0.16).toFixed(1);
+                document.getElementById('rA').innerText = (v*0.38).toFixed(1);
+                document.getElementById('rJ').innerText = (v*2.52).toFixed(1);
+                document.getElementById('rS').innerText = (v*27.9).toFixed(1);
             }
         }
 
-        // КВІЗ
-        function checkQuiz() {
-            const q3 = document.querySelector('input[name="q3"]:checked');
-            if (q3 && q3.value === "a") {
-                document.getElementById('quizResult').innerText = "Ти — ідеальний кандидат! Твої навички роботи з металом будуть незамінні на Марсі.";
-            } else {
-                document.getElementById('quizResult').innerText = "Космос — це важко, але твої навички можуть знадобитися на Землі.";
-            }
-        }
-
-        // NASA DASHBOARD DATA
+        // ДАНІ
         setInterval(() => {
-            const status = ["На орбіті", "Зв'язок: ОК", "Сканування...", "Дані стабільні"];
-            document.getElementById('iss-status').innerText = status[Math.floor(Math.random() * status.length)];
-            const utc = new Date();
-            document.getElementById('utc-time').innerText = utc.toISOString().slice(11, 19);
-            const MSD = (utc.getTime() / 86400000 + 2440587.5 - 2405522.0028779) / 1.0274912517;
-            const MTC = (MSD * 24) % 24;
-            const mtc_h = Math.floor(MTC), mtc_m = Math.floor((MTC - mtc_h) * 60), mtc_s = Math.floor(((MTC - mtc_h) * 60 - mtc_m) * 60);
-            document.getElementById('mars-time').innerText = `${mtc_h.toString().padStart(2, '0')}:${mtc_m.toString().padStart(2, '0')}:${mtc_s.toString().padStart(2, '0')}`;
+            const utc = new Date(); document.getElementById('utc').innerText = utc.toISOString().slice(11,19);
+            const m = (utc.getTime()/86400000 + 2440587.5 - 2405522.0028779)/1.0274912517;
+            const mtc = (m*24)%24; const h = Math.floor(mtc), min = Math.floor((mtc-h)*60), s = Math.floor(((mtc-h)*60-min)*60);
+            document.getElementById('mars').innerText = `${h.toString().padStart(2,'0')}:${min.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
         }, 1000);
     </script>
 </body>
