@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMOS X | Велика Енциклопедія Всесвіту</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #010204;
+            --blue: #00f2fe;
+            --purple: #bc4eff;
+            --orange: #ff8c00;
+            --text: #e0e6ed;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+
+        /* НАВІГАЦІЯ */
+        header {
+            padding: 15px 0; position: fixed; top: 0; width: 100%;
+            background: rgba(1, 2, 4, 0.95); backdrop-filter: blur(15px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: 2px; }
+        .logo span { color: var(--blue); }
+        
+        nav { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 5px; }
+        nav::-webkit-scrollbar { height: 2px; }
+        nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; white-space: nowrap; }
+        nav a:hover { color: var(--blue); }
+
+        /* HERO */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; padding: 0 20px;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 10vw, 6rem);
+            background: linear-gradient(90deg, #fff, var(--blue), var(--purple), #fff);
+            background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+            color: transparent; animation: shine 5s linear infinite; margin-bottom: 20px;
+        }
+
+        /* РОЗДІЛИ */
+        .section-padding { padding: 120px 0; }
+        .section-title {
+            text-align: center; font-family: 'Orbitron', sans-serif; font-size: 2.5rem;
+            margin-bottom: 60px; letter-spacing: 4px; color: #fff; text-transform: uppercase;
+        }
+        .section-title span { color: var(--blue); }
+
+        /* СТАТТІ */
+        .article-card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 50px; border-radius: 40px; margin-bottom: 60px;
+            backdrop-filter: blur(5px);
+        }
+        .article-card h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 25px; font-size: 2rem; }
+        .article-card h3 { color: var(--purple); margin: 30px 0 15px; font-family: 'Orbitron'; }
+        .article-card p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.85; }
+        .article-card img { width: 100%; border-radius: 20px; margin: 20px 0; border: 1px solid var(--border); }
+
+        /* ПЛАНЕТИ */
+        .planet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .planet-card {
+            background: var(--glass); padding: 30px; border-radius: 25px;
+            border: 1px solid var(--border); transition: 0.3s;
+        }
+        .planet-card:hover { border-color: var(--blue); transform: translateY(-10px); background: rgba(0, 242, 254, 0.02); }
+        .planet-card h3 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 15px; }
+        .planet-card ul { list-style: none; font-size: 0.9rem; opacity: 0.7; }
+        .planet-card li { margin-bottom: 5px; }
+
+        /* ЦІКАВІ ФАКТИ */
+        .fact-box {
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.1), transparent);
+            border-left: 4px solid var(--blue); padding: 25px; margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        /* КАЛЬКУЛЯТОР */
+        .calc-box { background: rgba(188, 78, 255, 0.05); padding: 60px 20px; border-radius: 40px; text-align: center; border: 1px solid rgba(188, 78, 255, 0.1); }
+        input { background: #000; border: 2px solid var(--blue); padding: 15px; color: #fff; border-radius: 12px; font-family: 'Orbitron'; font-size: 1.5rem; width: 180px; text-align: center; margin: 20px 0; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 30px; }
+        .res-item { background: var(--glass); padding: 20px; border-radius: 15px; }
+        .res-item b { font-size: 1.8rem; color: var(--blue); font-family: 'Orbitron'; display: block; }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .faq-item h4 { font-family: 'Orbitron'; color: var(--purple); margin-bottom: 10px; }
+
+        @keyframes shine { to { background-position: 200% center; } }
+        footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">COSMOS<span>X</span></a>
+            <nav>
+                <a href="#sun">Сонце</a>
+                <a href="#planets">Планети</a>
+                <a href="#deep">Глибокий космос</a>
+                <a href="#mysteries">Таємниці</a>
+                <a href="#calc">Вага</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>БЕЗМЕЖНІСТЬ</h1>
+        <p>Повний путівник по Всесвіту: від атомів у вашому тілі до горизонту подій надмасивних чорних дір.</p>
+        <a href="#sun" style="border: 2px solid var(--blue); color: var(--blue); padding: 12px 30px; border-radius: 50px; text-decoration: none; font-family: 'Orbitron'; font-weight: bold;">Почати подорож</a>
+    </section>
+
+    <div class="container">
+        
+        <section id="sun" class="section-padding">
+            <div class="article-card">
+                <h2>Сонце: Двигун життя</h2>
+                <p>Наша зірка — це розпечена газова куля, яка тримає на своїй гравітаційній «прив'язі» все в радіусі 15 трильйонів кілометрів. Сонце настільки величезне, що становить 99,8% маси всієї Сонячної системи.</p>
+                <div class="fact-box">
+                    <strong>Чи знаєте ви?</strong> Щосекунди Сонце спалює 600 мільйонів тонн водню, перетворюючи його на гелій. Енергія, що вивільняється, еквівалентна вибуху мільярдів ядерних бомб щомиті.
+                </div>
+                <p>Температура в ядрі Сонця сягає 15 000 000 °C. Саме тут відбувається термоядерний синтез, який дарує нам світло. Проте фотону світла потрібно майже 100 000 років, щоб дістатися з ядра до поверхні Сонця, і лише 8 хвилин, щоб долетіти до Землі.</p>
+            </div>
+        </section>
+
+        <section id="planets" class="section-padding">
+            <h2 class="section-title">Світи <span>Системи</span></h2>
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h3>Меркурій</h3>
+                    <ul><li>Відстань: 58 млн км</li><li>Температура: -180...430°C</li><li>Рік: 88 земних днів</li></ul>
+                    <p>Маленька, але надшвидка планета. У неї немає атмосфери, тому небо там завжди чорне, навіть вдень.</p>
+                </div>
+                <div class="planet-card">
+                    <h3>Венера</h3>
+                    <ul><li>Тиск: 92 атм</li><li>Температура: +465°C</li><li>Атмосфера: CO2</li></ul>
+                    <p>Справжнє пекло. Парниковий ефект тут настільки сильний, що на поверхні плавиться свинець.</p>
+                </div>
+                <div class="planet-card">
+                    <h3>Марс</h3>
+                    <ul><li>Доба: 24г 37хв</li><li>Гора Олімп: 21 км</li><li>Супутники: 2</li></ul>
+                    <p>Наша майбутня колонія. Тут колись текла вода, а зараз гуляють лише марсоходи.</p>
+                </div>
+                <div class="planet-card">
+                    <h3>Юпітер</h3>
+                    <ul><li>Маса: 318 Земних</li><li>Супутники: 95</li><li>Тип: Газовий гігант</li></ul>
+                    <p>Король планет. Його магнітне поле настільки потужне, що воно впливає навіть на супутники Сатурна.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep" class="section-padding">
+            <div class="article-card">
+                <h2>Глибокий Космос: Туманності та Зірки</h2>
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80" alt="Туманність">
+                <p>Зірки не вічні. Вони народжуються в «зоряних колисках» — гігантських хмарах газу та пилу, які ми називаємо туманностями. Коли гравітація стискає хмару до критичної межі, народжується нова зірка.</p>
+                <h3>Смерть Гігантів</h3>
+                <p>Коли у великої зірки закінчується паливо, вона вибухає. Цей вибух (Наднова) за яскравістю може затьмарити цілу галактику. Саме в цих вибухах утворюються важкі елементи: золото, срібло та залізо, з яких побудована наша планета і ми самі. Ми буквально створені із зоряного пилу.</p>
+            </div>
+        </section>
+
+        <section id="mysteries" class="section-padding">
+            <div class="article-card" style="border-left: 4px solid var(--purple);">
+                <h2>Чорні Діри: Кінець простору-часу</h2>
+                <p>Чорна діра — це область, де гравітація настільки сильна, що навіть світло не може втекти. Межа, за якою повернення неможливе, називається <strong>Горизонтом подій</strong>.</p>
+                <div class="fact-box">
+                    <strong>Ефект сповільнення часу:</strong> Завдяки теорії Ейнштейна ми знаємо: чим сильніша гравітація, тим повільніше йде час. Біля чорної діри одна година може дорівнювати 7 рокам на Землі.
+                </div>
+                <p>В центрі чорної діри знаходиться сингулярність — точка, де щільність нескінченна, а наші закони фізики просто перестають працювати.</p>
+            </div>
+        </section>
+
+        <section id="calc" class="section-padding">
+            <div class="calc-box">
+                <h2 class="section-title">Космічна <span>Вага</span></h2>
+                <p>Введіть свою вагу на Землі (кг):</p>
+                <input type="number" id="wIn" placeholder="80" oninput="calcW()">
+                <div class="res-grid">
+                    <div class="res-item"><span>Місяць</span><b id="rM">0</b></div>
+                    <div class="res-item"><span>Марс</span><b id="rA">0</b></div>
+                    <div class="res-item"><span>Юпітер</span><b id="rJ">0</b></div>
+                    <div class="res-item"><span>Сонце</span><b id="rS">0</b></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-padding">
+            <h2 class="section-title">Питання та <span>Відповіді</span></h2>
+            <div class="faq-item">
+                <h4>Скільки Всесвіту років?</h4>
+                <p>Приблизно 13,8 мільярда років. Ми дізналися це завдяки вимірюванню реліктового випромінювання, що залишилося після Великого вибуху.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Чому космос чорний?</h4>
+                <p>Це називається парадоксом Ольберса. Всесвіт розширюється, і світло від далеких зірок розтягується (червоний зсув), стаючи невидимим для людського ока.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Який Всесвіт на смак?</h4>
+                <p>Космонавти кажуть, що після виходу у відкритий космос скафандри пахнуть як розпечений метал, смажене м'ясо або дим від зварювання.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 COSMOS X Project | Велика Енциклопедія. Всі дані базуються на дослідженнях NASA та ESA.</p>
+    </footer>
+
+    <script>
+        // ЗІРКИ (ВАРП-ЕФЕКТ)
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let w, h, stars = [];
+        const count = 450, speed = 6;
+
+        class Star {
+            constructor() { this.init(); }
+            init() {
+                this.x = (Math.random() - 0.5) * 2000;
+                this.y = (Math.random() - 0.5) * 2000;
+                this.z = 2000; this.prevZ = this.z;
+            }
+            update() {
+                this.prevZ = this.z; this.z -= speed;
+                if (this.z <= 0) this.init();
+            }
+            draw() {
+                let x2d = (this.x / this.z) * (w / 2) + w / 2;
+                let y2d = (this.y / this.z) * (h / 2) + h / 2;
+                let px2d = (this.x / this.prevZ) * (w / 2) + w / 2;
+                let py2d = (this.y / this.prevZ) * (h / 2) + h / 2;
+                let s = (1 - this.z / 2000) * 3;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - this.z / 2000})`;
+                ctx.lineWidth = s; ctx.beginPath();
+                ctx.moveTo(px2d, py2d); ctx.lineTo(x2d, y2d); ctx.stroke();
+            }
+        }
+
+        function setup() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            stars = []; for (let i = 0; i < count; i++) stars.push(new Star());
+        }
+        function loop() {
+            ctx.fillStyle = '#010204'; ctx.fillRect(0, 0, w, h);
+            stars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(loop);
+        }
+        window.addEventListener('resize', setup);
+        setup(); loop();
+
+        // КАЛЬКУЛЯТОР
+        function calcW() {
+            let v = document.getElementById('wIn').value;
+            if (v > 0) {
+                document.getElementById('rM').innerText = (v * 0.16).toFixed(1);
+                document.getElementById('rA').innerText = (v * 0.38).toFixed(1);
+                document.getElementById('rJ').innerText = (v * 2.52).toFixed(1);
+                document.getElementById('rS').innerText = (v * 27.9).toFixed(1);
+            }
+        }
+    </script>
+</body>
+</html>
