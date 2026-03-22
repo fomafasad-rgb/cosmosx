@@ -3,267 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSMOS X | GIGA PORTAL</title>
-    
+    <title>COSMOS X | Головна</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --bg: #010208;
-            --blue: #00f2fe;
-            --purple: #bc4eff;
-            --text: #e0e6ed;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Exo 2', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
+        /* БАЗОВІ СТИЛІ (Однакові для всіх сторінок) */
+        :root { --bg: #010208; --blue: #00f2fe; --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Exo 2', sans-serif; background-color: var(--bg); color: #e0e6ed; line-height: 1.7; overflow-x: hidden; }
         #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-        .container { width: 94%; max-width: 1400px; margin: 0 auto; }
-
-        /* HEADER */
-        header {
-            padding: 15px 0; position: fixed; top: 0; width: 100%;
-            background: rgba(1, 2, 8, 0.95); backdrop-filter: blur(15px);
-            z-index: 1000; border-bottom: 2px solid #0032a0;
-        }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; }
-        .logo span { color: var(--blue); }
-
-        /* HERO & DASHBOARD */
-        .hero { padding: 120px 0 40px; text-align: center; }
-        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4.5rem); margin-bottom: 20px; letter-spacing: 5px; color: #fff; }
+        .container { width: 92%; max-width: 1200px; margin: 0 auto; }
         
-        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .dash-card { background: rgba(0, 50, 160, 0.15); border: 1px solid #0032a0; padding: 15px; border-radius: 8px; text-align: center; }
-        .dash-card label { font-size: 0.6rem; color: var(--blue); text-transform: uppercase; display: block; }
-        .dash-card span { font-family: 'Orbitron'; font-size: 1rem; color: #fff; }
+        /* НАВІГАЦІЯ */
+        header { padding: 15px 0; position: fixed; top: 0; width: 100%; background: rgba(1, 2, 8, 0.95); border-bottom: 2px solid #0032a0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron'; font-size: 1.5rem; color: #fff; text-decoration: none; }
+        .logo span { color: var(--blue); }
+        nav { display: flex; gap: 20px; }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--blue); border-bottom: 1px solid var(--blue); }
 
-        /* ТАБИ (ВКЛАДКИ) - ГОЛОВНЕ МЕНЮ */
-        .main-nav { 
-            display: flex; gap: 10px; margin-bottom: 40px; 
-            justify-content: center; flex-wrap: wrap; 
-        }
-        .tab-btn {
-            background: var(--glass); border: 1px solid var(--border);
-            color: #fff; padding: 12px 25px; cursor: pointer;
-            font-family: 'Orbitron'; font-size: 0.8rem; border-radius: 50px;
-            transition: 0.3s; text-transform: uppercase;
-        }
-        .tab-btn.active { background: var(--blue); color: #000; border-color: var(--blue); box-shadow: 0 0 20px rgba(0, 242, 254, 0.4); }
+        /* КОНТЕНТ ГОЛОВНОЇ */
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 20px; color: var(--blue); }
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; margin-top: 40px; }
+        .dash-card { background: rgba(0, 50, 160, 0.15); border: 1px solid #0032a0; padding: 20px; border-radius: 10px; }
+        .dash-card label { font-size: 0.7rem; color: var(--blue); text-transform: uppercase; }
+        .dash-card span { display: block; font-family: 'Orbitron'; font-size: 1.2rem; margin-top: 5px; }
 
-        /* КОНТЕНТ ТАБІВ */
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ВНУТРІШНІ ТАБИ (ДЛЯ ПЛАНЕТ) */
-        .sub-nav { display: flex; gap: 8px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 10px; }
-        .sub-tab-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-            color: #fff; padding: 8px 15px; cursor: pointer; font-size: 0.7rem;
-            border-radius: 5px; white-space: nowrap;
-        }
-        .sub-tab-btn.active { border-color: var(--purple); color: var(--purple); }
-
-        .article-view { background: var(--glass); border: 1px solid var(--border); padding: 50px; border-radius: 30px; }
-        .article-view h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 25px; font-size: 2.2rem; }
-        .article-view p { margin-bottom: 20px; font-size: 1.1rem; opacity: 0.9; }
-        .article-view img { width: 100%; border-radius: 20px; margin: 30px 0; border: 1px solid var(--border); max-height: 500px; object-fit: cover; }
-
-        /* СХЕМА РАКЕТИ */
-        .scheme-box { display: grid; grid-template-columns: 1fr 200px; gap: 30px; padding: 30px; background: rgba(0,0,0,0.4); border-radius: 20px; }
-        .stage-info { opacity: 0.2; transition: 0.5s; margin-bottom: 20px; }
-        .stage-info.active { opacity: 1; color: var(--blue); transform: translateX(10px); }
-        .rocket-well { position: relative; height: 400px; background: rgba(255,255,255,0.05); border-radius: 100px; display: flex; justify-content: center; }
-        #rocket-svg { position: absolute; width: 40px; bottom: 0; transition: 1s ease-in-out; filter: drop-shadow(0 0 10px var(--blue)); }
-
-        footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; }
-
-        @media (max-width: 800px) { .article-view { padding: 25px; } .info-block { grid-template-columns: 1fr; } .scheme-box { grid-template-columns: 1fr; } }
+        /* ВЕЛИКІ КНОПКИ РОЗДІЛІВ */
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .hub-link { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 40px; border-radius: 20px; text-decoration: none; color: #fff; transition: 0.3s; text-align: center; display: block; }
+        .hub-link:hover { border-color: var(--blue); transform: translateY(-5px); background: rgba(0, 242, 254, 0.05); }
+        .hub-link h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 15px; }
     </style>
 </head>
 <body>
-
     <canvas id="starfield"></canvas>
 
     <header>
         <div class="container header-content">
-            <a href="#" class="logo">COSMOS<span>X</span> GIGA</a>
-            <div id="utc-clock" style="font-family: 'Orbitron'; font-size: 0.8rem;">00:00:00</div>
+            <a href="index.html" class="logo">COSMOS<span>X</span></a>
+            <nav>
+                <a href="index.html" class="active">Головна</a>
+                <a href="solar.html">Система</a>
+                <a href="tech.html">Інженерія</a>
+            </nav>
         </div>
     </header>
 
-    <div class="container hero">
-        <h1>ЦЕНТРАЛЬНИЙ АРХІВ</h1>
-        <p>Виберіть розділ для глибокого занурення в дані про Всесвіт.</p>
-
+    <section class="container hero">
+        <h1>UNIVERSE ARCHIVE</h1>
+        <p>Головний термінал. Оберіть розділ бази даних для завантаження.</p>
+        
         <div class="dashboard">
-            <div class="dash-card"><label>Статус системи</label><span>ONLINE</span></div>
-            <div class="dash-card"><label>Сигнал МКС</label><span id="iss">Стабільний</span></div>
-            <div class="dash-card"><label>Марс (MTC)</label><span id="mars-clock">00:00</span></div>
-            <div class="dash-card"><label>Об'єкти в базі</label><span>14,205</span></div>
+            <div class="dash-card"><label>Статус</label><span>ONLINE</span></div>
+            <div class="dash-card"><label>МКС</label><span>На орбіті</span></div>
         </div>
 
-        <div class="main-nav">
-            <button class="tab-btn active" onclick="openMain(event, 'tab-solar')">Система</button>
-            <button class="tab-btn" onclick="openMain(event, 'tab-deep')">Глибокий Космос</button>
-            <button class="tab-btn" onclick="openMain(event, 'tab-tech')">Інженерія</button>
-            <button class="tab-btn" onclick="openMain(event, 'tab-ua')">Україна</button>
-            <button class="tab-btn" onclick="openMain(event, 'tab-rocket')">Схема Польоту</button>
+        <div class="hub-grid">
+            <a href="solar.html" class="hub-link">
+                <h2>🪐 Сонячна Система</h2>
+                <p>Дослідження планет, Сонця та супутників.</p>
+            </a>
+            <a href="tech.html" class="hub-link">
+                <h2>⚙️ Космічна Інженерія</h2>
+                <p>Аерокосмічні метали, зварювання та ракетобудування.</p>
+            </a>
         </div>
+    </section>
 
-        <div id="tab-solar" class="tab-content active">
-            <div class="sub-nav">
-                <button class="sub-tab-btn active" onclick="openSub(event, 'sun', 'solar-group')">Сонце</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'mercury', 'solar-group')">Меркурій</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'venus', 'solar-group')">Венера</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'earth', 'solar-group')">Земля</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'mars', 'solar-group')">Марс</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'jupiter', 'solar-group')">Юпітер</button>
-                <button class="sub-tab-btn" onclick="openSub(event, 'saturn', 'solar-group')">Сатурн</button>
-            </div>
-
-            <div id="sun" class="solar-group article-view" style="display: block;">
-                <h2>Сонце: Наша Зірка</h2>
-                <img src="https://images.unsplash.com/photo-1541876072-be6221090f6e?auto=format&fit=crop&w=1200&q=80" alt="Sun">
-                <p>Сонце — це розпечена газова куля, яка становить 99,8% всієї маси Сонячної системи. Його гравітація утримує все: від планет до найдрібніших часток пилу. Температура в ядрі сягає 15 мільйонів градусів за Цельсієм. Саме тут відбувається термоядерний синтез, що дарує нам світло.</p>
-                <p>Щосекунди Сонце перетворює 600 мільйонів тонн водню на гелій. Енергія, яку воно випромінює, йде до Землі 8 хвилин. Проте Сонце не вічне: через 5 мільярдів років воно перетвориться на Червоного гіганта.</p>
-            </div>
-
-            <div id="mars" class="solar-group article-view" style="display: none;">
-                <h2>Марс: Червона Планета</h2>
-                <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80" alt="Mars">
-                <p>Марс — четверта планета від Сонця. Відомий своїм іржавим кольором через оксид заліза. Тут знаходиться Олімп — найвищий вулкан у системі (21 км) та каньйон Долина Марінера, який довший за всю Європу.</p>
-                <p>Атмосфера Марса дуже тонка (95% CO₂), тому там неможливо дихати без скафандра. Проте SpaceX та NASA вже планують перші людські бази на цій планеті.</p>
-            </div>
-            </div>
-
-        <div id="tab-deep" class="tab-content">
-            <div class="article-view">
-                <h2>Чорні Діри та Горизонт Подій</h2>
-                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80" alt="Black Hole">
-                <p>Чорна діра — це об'єкт з такою потужною гравітацією, що навіть світло не може з нього вирватися. Межа чорної діри називається Горизонтом подій. Коли об'єкт перетинає цю межу, він назавжди зникає з нашого Всесвіту.</p>
-                <p>У центрі нашої галактики Чумацький Шлях знаходиться надмасивна чорна діра Стрілець А*. Її маса у 4 мільйони разів більша за масу нашого Сонця.</p>
-            </div>
-        </div>
-
-        <div id="tab-tech" class="tab-content">
-            <div class="article-view">
-                <h2>Металургія у Космосі</h2>
-                <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80" alt="Tech">
-                <p>Для будівництва ракет використовують **Титан Grade 5** та **Алюміній-літієві сплави**. Вони легкі, але витримують космічний холод та спеку. Для тебе як майстра цікавий факт: вакуумне зварювання в космосі — це унікальний процес, де метали з’єднуються на молекулярному рівні майже миттєво.</p>
-                <p>Теплові щити кораблів Starship SpaceX вкриті тисячами керамічних плиток, які витримують температуру 1600°C при вході в атмосферу Землі.</p>
-            </div>
-        </div>
-
-        <div id="tab-ua" class="tab-content">
-            <div class="article-view">
-                <h2>Українські Генії Космосу</h2>
-                <p>Сергій Корольов (народився у Житомирі) — головний конструктор перших супутників та кораблів. Юрій Кондратюк (Полтава) розрахував траєкторію для польоту на Місяць. Валентин Глушко (Одеса) створив найпотужніші в світі ракетні двигуни.</p>
-                <p>Україна і сьогодні виробляє ракети-носії («Зеніт», «Циклон») та комплектуючі для місій NASA та ESA.</p>
-            </div>
-        </div>
-
-        <div id="tab-rocket" class="tab-content">
-            <div class="article-view">
-                <h2>Вертикальний Профіль Польоту</h2>
-                <div class="scheme-box">
-                    <div class="stages">
-                        <div class="stage-info" id="s4"><h4>400 км - Орбіта</h4></div>
-                        <div class="stage-info" id="s3"><h4>110 км - Космос</h4></div>
-                        <div class="stage-info" id="s2"><h4>70 км - Розділення</h4></div>
-                        <div class="stage-info active" id="s1"><h4>0 км - Старт</h4></div>
-                    </div>
-                    <div class="rocket-well">
-                        <svg id="rocket-svg" viewBox="0 0 24 24" fill="white">
-                            <path d="M12,2C12,2 9,6 9,12C9,15 11,17 12,17C13,17 15,15 15,12C15,6 12,2 12,2M12,19C10.5,19 9.3,19.8 8.8,21C8.6,21.5 8.9,22 9.4,22H14.6C15.1,22 15.4,21.5 15.2,21C14.7,19.8 13.5,19 12,19Z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 COSMOS X GIGA PORTAL. Зроблено спеціально для Сергія.</p>
-    </footer>
-
-    <script>
-        // ЛОГІКА ЗІРОК
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        let w, h, stars = [];
-        function setup() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-            stars = [];
-            for(let i=0; i<400; i++) stars.push({x:(Math.random()-0.5)*2000, y:(Math.random()-0.5)*2000, z:2000});
-        }
-        function loop() {
-            ctx.fillStyle = '#010208'; ctx.fillRect(0,0,w,h);
-            stars.forEach(s => {
-                s.z -= 6; if(s.z<=0) s.z=2000;
-                let x = (s.x/s.z)*(w/2)+w/2; let y = (s.y/s.z)*(h/2)+h/2;
-                let size = (1-s.z/2000)*3; ctx.fillStyle = `rgba(255,255,255,${1-s.z/2000})`;
-                ctx.beginPath(); ctx.arc(x,y,size,0,Math.PI*2); ctx.fill();
-            });
-            requestAnimationFrame(loop);
-        }
-        window.addEventListener('resize', setup); setup(); loop();
-
-        // ЛОГІКА ТАБІВ
-        function openMain(evt, tabName) {
-            const contents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < contents.length; i++) contents[i].classList.remove('active');
-            const btns = document.getElementsByClassName('tab-btn');
-            for (let i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
-        }
-
-        function openSub(evt, subName, group) {
-            const members = document.getElementsByClassName(group);
-            for (let i = 0; i < members.length; i++) members[i].style.display = 'none';
-            const btns = evt.currentTarget.parentNode.getElementsByClassName('sub-tab-btn');
-            for (let i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-            document.getElementById(subName).style.display = 'block';
-            evt.currentTarget.classList.add('active');
-        }
-
-        // РАКЕТА
-        let stage = 1;
-        setInterval(() => {
-            stage++; if(stage > 4) stage = 1;
-            const r = document.getElementById('rocket-svg');
-            const st = document.querySelectorAll('.stage-info');
-            let pos = (stage-1)*30; if(stage===4) pos=90;
-            r.style.bottom = pos + '%';
-            st.forEach(s => s.classList.remove('active'));
-            document.getElementById('s' + stage).classList.add('active');
-        }, 3000);
-
-        // ГОДИННИКИ
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('utc-clock').innerText = now.toISOString().slice(11,19);
-            // Спрощений Марс (MTC)
-            const mtc = (now.getUTCHours() + 1) % 24;
-            document.getElementById('mars-clock').innerText = mtc.toString().padStart(2,'0') + ":" + now.getUTCMinutes().toString().padStart(2,'0');
-        }, 1000);
-    </script>
+    <script src="stars.js"></script>
 </body>
 </html>
