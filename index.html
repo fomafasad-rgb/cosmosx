@@ -6,7 +6,7 @@
     <title>COSMOS X | Головна</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* БАЗОВІ СТИЛІ (Однакові для всіх сторінок) */
+        /* БАЗОВІ СТИЛІ */
         :root { --bg: #010208; --blue: #00f2fe; --border: rgba(255, 255, 255, 0.1); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Exo 2', sans-serif; background-color: var(--bg); color: #e0e6ed; line-height: 1.7; overflow-x: hidden; }
@@ -15,26 +15,36 @@
         
         /* НАВІГАЦІЯ */
         header { padding: 15px 0; position: fixed; top: 0; width: 100%; background: rgba(1, 2, 8, 0.95); border-bottom: 2px solid #0032a0; z-index: 100; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .logo { font-family: 'Orbitron'; font-size: 1.5rem; color: #fff; text-decoration: none; }
         .logo span { color: var(--blue); }
-        nav { display: flex; gap: 20px; }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
         nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--blue); border-bottom: 1px solid var(--blue); }
 
         /* КОНТЕНТ ГОЛОВНОЇ */
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 20px; color: var(--blue); }
+        .hero { min-height: 100vh; padding-top: 140px; padding-bottom: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 5rem); margin-bottom: 20px; color: var(--blue); }
+        .hero p { max-width: 600px; font-size: 1.1rem; opacity: 0.8; }
+        
         .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; margin-top: 40px; }
         .dash-card { background: rgba(0, 50, 160, 0.15); border: 1px solid #0032a0; padding: 20px; border-radius: 10px; }
         .dash-card label { font-size: 0.7rem; color: var(--blue); text-transform: uppercase; }
         .dash-card span { display: block; font-family: 'Orbitron'; font-size: 1.2rem; margin-top: 5px; }
 
         /* ВЕЛИКІ КНОПКИ РОЗДІЛІВ */
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .hub-link { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 40px; border-radius: 20px; text-decoration: none; color: #fff; transition: 0.3s; text-align: center; display: block; }
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; width: 100%; }
+        .hub-link { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 40px 20px; border-radius: 20px; text-decoration: none; color: #fff; transition: 0.3s; text-align: center; display: block; }
         .hub-link:hover { border-color: var(--blue); transform: translateY(-5px); background: rgba(0, 242, 254, 0.05); }
-        .hub-link h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 15px; }
+        .hub-link h2 { font-family: 'Orbitron'; color: var(--blue); margin-bottom: 15px; font-size: 1.5rem; }
+        .hub-link p { font-size: 0.95rem; opacity: 0.8; }
+
+        /* АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ */
+        @media (max-width: 600px) {
+            .header-content { flex-direction: column; text-align: center; }
+            .hero { padding-top: 130px; } /* Даємо місце для меню, щоб текст не ліз на нього */
+            .hero h1 { font-size: 2.2rem; }
+        }
     </style>
 </head>
 <body>
